@@ -1,5 +1,5 @@
 
-var topics = [];
+var topics = ["Superman", "Spider-man"];
 $(document).on("click", ".topic-btn", displayUserChoice);
 renderButtons();
 function displayUserChoice() {
