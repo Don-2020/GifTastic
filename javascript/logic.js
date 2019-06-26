@@ -8,7 +8,7 @@ function displayUserChoice() {
     // $.get(`http://api.giphy.com/v1/gifs/search?q=ryan+${userInput}&api_key=VHDVxuIJ16xoHvKzIwu8yiKsdlJVcihg
     // &limit=5`);
 
-    var queryURL = "https://api.giphy.com/v1/gifs/search?q="+ userInput + "&api_key=VHDVxuIJ16xoHvKzIwu8yiKsdlJVcihg&limit=6";
+    var queryURL = "https://api.giphy.com/v1/gifs/search?q="+ userInput + "&api_key=VHDVxuIJ16xoHvKzIwu8yiKsdlJVcihg&limit=7";
 
     $.ajax({
         url: queryURL,
@@ -21,7 +21,7 @@ function displayUserChoice() {
             var topicDiv = $("<div> ");
 
             //storing the rating data
-            var rating = results.rating;
+            var rating = results[i].rating;
 
             //Creating an element to have the rating displayed
             var rDisplay = $("<p>").text("Rating: " + rating);
@@ -29,12 +29,16 @@ function displayUserChoice() {
             //displaying the rating
             
             var topicImage = $("<img>");
-            topicImage.attr("src", results[i].images.fixed_height.url);
+            topicImage.attr("src", results[i].images.fixed_height_still.url);
+            topicImage.attr("class","gif")
+            topicImage.attr("data-still", results[i].images.fixed_height_still.url);
+            topicImage.attr("data-animate", results[i].images.fixed_height.url)
+            topicImage.attr("data-state", "still");
 
-            topicDiv.prepend(rDisplay)
-            topicDiv.prepend(topicImage);
+            
+            topicDiv.append(rDisplay,topicImage);
 
-            $("#comic-view").prepend(topicDiv);
+            $("#comic-view").append(topicDiv);
         }
     })
 
@@ -62,3 +66,19 @@ $("#add-hero").on("click", function (event) {
     topics.push(userChoice);
     renderButtons();
 });
+
+$("#comic-view").on("click", ".gif",function(){
+    var state = $(this).attr("data-state");
+    // If the clicked image's state is still, update its src attribute to what its data-animate value is.
+    // Then, set the image's data-state to animate
+    // Else set src to the data-still value
+    if (state === "still") {
+      $(this).attr("src", $(this).attr("data-animate"));
+      $(this).attr("data-state", "animate");
+    } else {
+      $(this).attr("src", $(this).attr("data-still"));
+      $(this).attr("data-state", "still");
+    }
+})
+    
+
