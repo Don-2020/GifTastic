@@ -8,7 +8,7 @@ function displayUserChoice() {
     // $.get(`http://api.giphy.com/v1/gifs/search?q=ryan+${userInput}&api_key=VHDVxuIJ16xoHvKzIwu8yiKsdlJVcihg
     // &limit=5`);
 
-    var queryURL = "https://api.giphy.com/v1/gifs/search?q="+ userInput + "&api_key=VHDVxuIJ16xoHvKzIwu8yiKsdlJVcihg&limit=7";
+    var queryURL = "https://api.giphy.com/v1/gifs/search?q="+ userInput + "&api_key=VHDVxuIJ16xoHvKzIwu8yiKsdlJVcihg&limit=10";
 
     $.ajax({
         url: queryURL,
@@ -38,7 +38,7 @@ function displayUserChoice() {
             
             topicDiv.append(rDisplay,topicImage);
 
-            $("#comic-view").append(topicDiv);
+            $("#comic-view").prepend(topicDiv);
         }
     })
 
@@ -54,17 +54,21 @@ function renderButtons() {
         a.addClass("topic-btn");
         a.attr("data-name", topics[i]);
         a.text(topics[i]);
-       
+        $("#buttons-view").append(a);
     }
-    $("#buttons-view").append(a);
+    
 }
 // This function handles events where a movie button is clicked
 $("#add-hero").on("click", function (event) {
     event.preventDefault();
-    var userChoice = $("#user-input").val()
+    var userChoice = $("#user-input").val().trim();
+   
     console.log(userChoice)
     topics.push(userChoice);
+
     renderButtons();
+
+   
 });
 
 $("#comic-view").on("click", ".gif",function(){
