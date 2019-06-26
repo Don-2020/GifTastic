@@ -11,29 +11,37 @@
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
     <title> Giphy Api</title>
-    
+
 </head>
 
 <body>
-    <jumbotron>
-        <h1>GIFTASTIC</h1>
-    </jumbotron>
+    <div class="container">
+        <jumbotron>
+            <h1>GIFTASTIC</h1>
+        </jumbotron>
 
-    <div  id="buttons-view" >
+        <div class="row">
+            <div class="col-sm-8">
+                <div id="buttons-view">
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <form id="input-form">
+                    <label for="topic-input">Add a Comic hero</label>
+                    <input type="text" id="user-input">
+                    <br>
+                    <!-- Button triggers new movie to be added -->
+                    <input id="add-hero" type="submit" value="Submit">
+                </form>
+            </div>
         </div>
-    <form id="input-form">
-        <label for="topic-input">Add a Comic hero</label>
-        <input type="text" id="user-input">
-        <br>
-
-        <!-- Button triggers new movie to be added -->
-        <input id="add-hero" type="submit" value="Submit">
-    </form>
-
-    <!-- Movies will Get Dumped Here -->
-    <div id="comic-view"></div>
-    </form>
-
+        <div class="row">
+            <div class="col-sm-8">
+                <!-- Movies will Get Dumped Here -->
+                <div id="comic-view"></div>
+            </div>
+        </div>
+    </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
